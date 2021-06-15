@@ -73,14 +73,14 @@ void PointingFinger_Init(const HelperFunctions& helperFunctions) {
 	}
 }
 
-static ModelInfo* SonicPlaneMdl = nullptr;
+static ModelInfo* AmyPlaneMdl = nullptr;
 
 DataPointer(NJS_OBJECT, Tornado1_Object, 0x28B1DA0);
 DataPointer(NJS_OBJECT, Tornado2Before_Object, 0x27EB198);
 DataPointer(NJS_OBJECT, Tornado2Change_Object, 0x280C158);
 
 bool CheckIfSonicPlane(NJS_MODEL_SADX* model) {
-	return SonicPlaneMdl->getlabel(model) != "";
+	return AmyPlaneMdl->getlabel(model) != "";
 }
 
 void __cdecl TornadoCallBack(NJS_MODEL_SADX* model, int blend, int idk) {
@@ -107,12 +107,12 @@ void Tornado_init(const HelperFunctions& helperFunctions) {
 	ModelInfo* mdl = new ModelInfo(helperFunctions.GetReplaceablePath("system\\AMY_PLANE.sa1mdl"));
 
 	if (mdl->getformat() == ModelFormat_Basic) {
-		SonicPlaneMdl = mdl;
+		AmyPlaneMdl = mdl;
 
 		// We only replace Sonic's part of the plane
-		Tornado1_Object.child->sibling->sibling->sibling->child = SonicPlaneMdl->getmodel();
-		Tornado2Before_Object.child->sibling->sibling->child = SonicPlaneMdl->getmodel();
-		Tornado2Change_Object.child->sibling->sibling->sibling->sibling->child = SonicPlaneMdl->getmodel();
+		Tornado1_Object.child->sibling->sibling->sibling->child = AmyPlaneMdl->getmodel();
+		Tornado2Before_Object.child->sibling->sibling->child = AmyPlaneMdl->getmodel();
+		Tornado2Change_Object.child->sibling->sibling->sibling->sibling->child = AmyPlaneMdl->getmodel();
 
 		// Hack to use our own texture for Amy's part of the plane, allowing compatibility with dc mods.
 		WriteCall((void*)0x62753A, njAction_Queue_Tornado);
@@ -494,6 +494,5 @@ extern "C"
 		ReplacePVM("supersonic", "SuperAmy");
 		ReplacePVM("hypersonic", "HyperAmy");
 	}
-
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer };
 }
