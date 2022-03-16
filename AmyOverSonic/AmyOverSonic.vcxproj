@@ -153,9 +153,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Amy.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="satextlist.h" />
+    <ClInclude Include="Sonic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AmyAdv.cpp" />
